@@ -44,6 +44,8 @@ The segmentation script performs the following steps:
     vertical_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 40))
     horizontal_lines = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, horizontal_kernel, iterations=2)
     vertical_lines = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, vertical_kernel, iterations=2)
+    horizontal_lines = cv2.dilate(horizontal_lines, np.ones((2, 2), np.uint8), iterations=2)
+    vertical_lines = cv2.dilate(vertical_lines, np.ones((2, 2), np.uint8), iterations=2)
     ```
 
     <img width="311" alt="image" src="https://github.com/user-attachments/assets/99d60706-3222-42d6-b10b-e79ad4d4f8db">
