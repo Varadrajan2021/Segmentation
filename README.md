@@ -20,16 +20,23 @@ The segmentation script performs the following steps:
     ```python
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     ```
+    <img width="314" alt="image" src="https://github.com/user-attachments/assets/f357d8ee-e307-4c5c-83fc-3d20e83fcfbb">
+
 
 3. **Apply Gaussian Blur**: Gaussian blur is applied to the grayscale image to reduce noise.
     ```python
     blurred = cv2.GaussianBlur(gray, (5, 5), 0)
     ```
+    <img width="310" alt="image" src="https://github.com/user-attachments/assets/570dfe53-4a5c-44f6-9279-1ffff240e111">
+
+
 
 4. **Apply Adaptive Thresholding**: Adaptive thresholding is applied to the blurred image to create a binary image.
     ```python
     thresh = cv2.adaptiveThreshold(blurred, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 15, 2)
     ```
+    <img width="310" alt="image" src="https://github.com/user-attachments/assets/a2ca4ef9-5302-4d04-a095-ed7e36cc1a45">
+
 
 5. **Detect Lines**: Horizontal and vertical lines are detected using morphological operations.
     ```python
@@ -39,6 +46,12 @@ The segmentation script performs the following steps:
     vertical_lines = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, vertical_kernel, iterations=2)
     ```
 
+    <img width="311" alt="image" src="https://github.com/user-attachments/assets/99d60706-3222-42d6-b10b-e79ad4d4f8db">
+
+    <img width="311" alt="image" src="https://github.com/user-attachments/assets/f530d026-585b-4841-bf03-38a9c324fce2">
+
+
+
 6. **Combine Lines and Apply Morphological Operations**: The horizontal and vertical lines are combined, and morphological operations are applied to close gaps.
     ```python
     lines = cv2.addWeighted(horizontal_lines, 0.5, vertical_lines, 0.5, 0.0)
@@ -47,11 +60,15 @@ The segmentation script performs the following steps:
     closed = cv2.dilate(closed, kernel, iterations=1)
     closed = cv2.erode(closed, kernel, iterations=1)
     ```
+    <img width="308" alt="image" src="https://github.com/user-attachments/assets/44e5cc1b-4039-40ff-b89c-bc8e165b5070">
+
 
 7. **Find Contours**: Contours are found in the processed image.
     ```python
     contours, hierarchy = cv2.findContours(closed, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     ```
+    <img width="302" alt="image" src="https://github.com/user-attachments/assets/e5390aae-4e68-4a6a-a2a4-cc3830e23fba">
+
 
 8. **Filter and Extract Segments**: Contours are filtered based on aspect ratio and size, and the segments are extracted and saved as individual images.
     ```python
@@ -81,6 +98,14 @@ The segmentation script performs the following steps:
                 'AspectRatio': aspect_ratio
             })
     ```
+    <img width="314" alt="image" src="https://github.com/user-attachments/assets/2e783b49-02d1-40dd-8665-3de339296aaa">
+
+    <img width="313" alt="image" src="https://github.com/user-attachments/assets/98faeff2-5fbc-4f0e-94aa-8ec53fe42e80">
+
+    <img width="222" alt="image" src="https://github.com/user-attachments/assets/077f0e98-2e71-43c6-8904-3b617a9bd034">
+
+
+
 
 9. **Build Hierarchical Structure**: A hierarchical structure of the segments is built, excluding child segments from parent segments.
     ```python
@@ -109,6 +134,8 @@ The segmentation script performs the following steps:
 
     hierarchical_segments = build_hierarchy(segments)
     ```
+    <img width="312" alt="image" src="https://github.com/user-attachments/assets/24371a93-780d-4b7e-9722-96a069f40057">
+
 
 10. **Save JSON Output**: The hierarchical segments are saved to a JSON file.
     ```python
