@@ -20,6 +20,8 @@ The segmentation script performs the following steps:
     ```python
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     ```
+    - **Why**: Grayscale simplifies the image and reduces computational complexity by removing color information, which is not needed for segmentation.
+      
     <img width="314" alt="image" src="https://github.com/user-attachments/assets/f357d8ee-e307-4c5c-83fc-3d20e83fcfbb">
 
 
@@ -27,6 +29,8 @@ The segmentation script performs the following steps:
     ```python
     blurred = cv2.GaussianBlur(gray, (5, 5), 0)
     ```
+    - **Why**: Blurring helps to smooth the image and reduce noise, which can interfere with contour detection.
+      
     <img width="310" alt="image" src="https://github.com/user-attachments/assets/570dfe53-4a5c-44f6-9279-1ffff240e111">
 
 
@@ -35,6 +39,7 @@ The segmentation script performs the following steps:
     ```python
     thresh = cv2.adaptiveThreshold(blurred, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 15, 2)
     ```
+    - **Why**: Thresholding converts the image to a binary format (black and white), making it easier to detect contours and lines.
     <img width="310" alt="image" src="https://github.com/user-attachments/assets/a2ca4ef9-5302-4d04-a095-ed7e36cc1a45">
 
 
@@ -47,6 +52,7 @@ The segmentation script performs the following steps:
     horizontal_lines = cv2.dilate(horizontal_lines, np.ones((2, 2), np.uint8), iterations=2)
     vertical_lines = cv2.dilate(vertical_lines, np.ones((2, 2), np.uint8), iterations=2)
     ```
+    - **Why**: Detecting lines helps to identify the structure of the image, such as tables or text blocks, which are often defined by horizontal and vertical lines.
 
     <img width="311" alt="image" src="https://github.com/user-attachments/assets/99d60706-3222-42d6-b10b-e79ad4d4f8db">
 
@@ -62,6 +68,9 @@ The segmentation script performs the following steps:
     closed = cv2.dilate(closed, kernel, iterations=1)
     closed = cv2.erode(closed, kernel, iterations=1)
     ```
+    - **Why**: Combining lines and closing gaps ensures a continuous line structure, which helps in accurately identifying and segmenting different regions in the image.
+
+        
     <img width="308" alt="image" src="https://github.com/user-attachments/assets/44e5cc1b-4039-40ff-b89c-bc8e165b5070">
 
 
@@ -69,6 +78,8 @@ The segmentation script performs the following steps:
     ```python
     contours, hierarchy = cv2.findContours(closed, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     ```
+    - **Why**: Contours represent the boundaries of objects in the image, which are used to define the segments.
+    
     <img width="302" alt="image" src="https://github.com/user-attachments/assets/e5390aae-4e68-4a6a-a2a4-cc3830e23fba">
 
 
@@ -100,6 +111,8 @@ The segmentation script performs the following steps:
                 'AspectRatio': aspect_ratio
             })
     ```
+    - **Why**: Filtering ensures only relevant segments (blocks of text or other important regions) are extracted. Saving the segments allows for further analysis or processing.
+    
     <img width="314" alt="image" src="https://github.com/user-attachments/assets/2e783b49-02d1-40dd-8665-3de339296aaa">
 
     <img width="313" alt="image" src="https://github.com/user-attachments/assets/98faeff2-5fbc-4f0e-94aa-8ec53fe42e80">
@@ -136,6 +149,9 @@ The segmentation script performs the following steps:
 
     hierarchical_segments = build_hierarchy(segments)
     ```
+    
+    - **Why**: Building a hierarchical structure helps in understanding the relationship between different segments, which is useful for applications that require context-aware processing.
+
     <img width="312" alt="image" src="https://github.com/user-attachments/assets/24371a93-780d-4b7e-9722-96a069f40057">
 
 
@@ -146,6 +162,7 @@ The segmentation script performs the following steps:
         json.dump(hierarchical_segments, f, indent=4)
     return output_json_path, segments
     ```
+    - **Why**: Saving the hierarchical structure in a JSON file allows for easy sharing and further processing of the segmented data.
 
 ## Output
 
