@@ -58,6 +58,12 @@ The segmentation script performs the following steps:
 
     <img width="311" alt="image" src="https://github.com/user-attachments/assets/f530d026-585b-4841-bf03-38a9c324fce2">
 
+    <img width="392" alt="image" src="https://github.com/user-attachments/assets/70fb7b29-8b25-42ca-ab6b-3b501810b9c1">
+
+    <img width="395" alt="image" src="https://github.com/user-attachments/assets/a4876a7e-c135-4be5-a7ac-6bc4c79d9a6e">
+
+
+
 
 
 6. **Combine Lines and Apply Morphological Operations**: The horizontal and vertical lines are combined, and morphological operations are applied to close gaps.
