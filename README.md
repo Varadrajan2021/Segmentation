@@ -58,9 +58,9 @@ The segmentation script performs the following steps:
 
     <img width="311" alt="image" src="https://github.com/user-attachments/assets/f530d026-585b-4841-bf03-38a9c324fce2">
 
-    <img width="392" alt="image" src="https://github.com/user-attachments/assets/70fb7b29-8b25-42ca-ab6b-3b501810b9c1">
+    <img width="311" alt="image" src="https://github.com/user-attachments/assets/70fb7b29-8b25-42ca-ab6b-3b501810b9c1">
 
-    <img width="395" alt="image" src="https://github.com/user-attachments/assets/a4876a7e-c135-4be5-a7ac-6bc4c79d9a6e">
+    <img width="311" alt="image" src="https://github.com/user-attachments/assets/a4876a7e-c135-4be5-a7ac-6bc4c79d9a6e">
 
 
 
@@ -118,17 +118,19 @@ The segmentation script performs the following steps:
             })
     ```
     - **Why**: Filtering ensures only relevant segments (blocks of text or other important regions) are extracted. Saving the segments allows for further analysis or processing.
-    
-    <img width="314" alt="image" src="https://github.com/user-attachments/assets/2e783b49-02d1-40dd-8665-3de339296aaa">
+  
+    <img width="308" alt="image" src="https://github.com/user-attachments/assets/eb8dae70-ec24-4f16-9fed-125b5e4cfc0f">
 
-    <img width="313" alt="image" src="https://github.com/user-attachments/assets/98faeff2-5fbc-4f0e-94aa-8ec53fe42e80">
+    
+    <img width="308" alt="image" src="https://github.com/user-attachments/assets/3119dac5-84ae-4c9d-b594-3fbd671d02e4">
+
 
     <img width="222" alt="image" src="https://github.com/user-attachments/assets/077f0e98-2e71-43c6-8904-3b617a9bd034">
 
 
 
 
-9. **Build Hierarchical Structure**: A hierarchical structure of the segments is built, excluding child segments from parent segments.
+8. **Build Hierarchical Structure**: A hierarchical structure of the segments is built, excluding child segments from parent segments.
     ```python
     def exclude_child_segments(parent_img, children):
         mask = np.zeros(parent_img.shape[:2], dtype=np.uint8)
@@ -161,7 +163,7 @@ The segmentation script performs the following steps:
     <img width="312" alt="image" src="https://github.com/user-attachments/assets/24371a93-780d-4b7e-9722-96a069f40057">
 
 
-10. **Save JSON Output**: The hierarchical segments are saved to a JSON file.
+9. **Save JSON Output**: The hierarchical segments are saved to a JSON file.
     ```python
     output_json_path = os.path.join(app.config['OUTPUT_FOLDER'], 'hierarchical_segments.json')
     with open(output_json_path, 'w') as f:
